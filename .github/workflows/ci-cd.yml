@@ -50,11 +50,12 @@ jobs:
         resource-group: ${{ secrets.RESOURCE_GROUP }}
         cluster-name: ${{ secrets.AKS_CLUSTER }}
 
-    - name: Deploy Users
-      run: kubectl set image deployment/users-deployment users=$REGISTRY/users-service:latest
-
-    - name: Deploy Orders
-      run: kubectl set image deployment/orders-deployment orders=$REGISTRY/orders-service:latest
+    - name: Deploy Kubernetes Manifests
+      run: |
+        kubectl apply -f k8s/
 
     - name: Verify
-      run: kubectl get pods
+      run: |
+        kubectl get deployments
+        kubectl get pods
+        kubectl get services
