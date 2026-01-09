@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: users
-        image: users-service:latest
+        image: microlabacr.azurecr.io/users-service:latest
         ports:
         - containerPort: 8001
 ---
@@ -23,10 +23,9 @@ kind: Service
 metadata:
   name: users-service
 spec:
-  # type: NodePort
+  type: LoadBalancer
   selector:
     app: users
   ports:
     - port: 8001
       targetPort: 8001
-      # nodePort: 30001
