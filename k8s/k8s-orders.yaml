@@ -15,7 +15,6 @@ spec:
       containers:
       - name: orders
         image: orders-service:latest
-        imagePullPolicy: Never
         env:
         - name: USERS_SERVICE_URL
           value: "http://users-service:8001/users"
